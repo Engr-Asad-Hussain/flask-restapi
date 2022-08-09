@@ -12,7 +12,11 @@ class Database:
     def get_conn(cls):
         try:
             conn = mariadb.connect(
-                
+                database = cls._database,
+                username = cls._username,
+                password = cls._password,
+                host = cls._host,
+                port = cls._port
             )
             cls._conn = conn
         except mariadb.Error as e:
