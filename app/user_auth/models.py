@@ -1,6 +1,4 @@
 
-import errno
-
 
 def registration():
     """ Creates a new record in database """
