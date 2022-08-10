@@ -9,6 +9,7 @@ class Database:
     _port     = app.config['DB_PORT']
     _conn      = None
     
+    @classmethod
     def get_conn(cls):
         print('Database get_conn')
         try:
@@ -23,10 +24,36 @@ class Database:
         except mariadb.Error as e:
             raise ConnectionError(f'Unable to connect database. {e}')
     
+    @classmethod
     def close(cls):
         print('Database close')
         cls._conn.close()
         cls._conn = None
+
+    @classmethod
+    def commit(cls):
+        cls._conn.commit()
+
+    def cursor(function):
+        def wrapper(*args, **kwargs):
+            results = function(*args, **kwargs)
+        return wrapper
+
+    @cursor
+    def get():
+        pass
+
+    @cursor
+    def post():
+        pass
+
+    @cursor
+    def put():
+        pass
+
+    @cursor
+    def delete():
+        pass
 
 
 @app.before_request
